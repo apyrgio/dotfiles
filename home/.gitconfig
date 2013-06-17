@@ -1,0 +1,15 @@
+[user]
+	name = Alex Pyrgiotis
+	email = apyrgio@grnet.gr
+[core]
+	editor = vim
+[color]
+	ui = true
+[push]
+	default = current
+[alias]
+	tree = log --graph --decorate --abbrev-commit --date=relative --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr)%Creset by %C(yellow)%ae%Creset'
+	tree-alt = log --graph --decorate --pretty=oneline --abbrev-commit
+[merge]
+	ff = false
+	commit = false
