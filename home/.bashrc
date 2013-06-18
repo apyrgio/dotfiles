@@ -41,9 +41,9 @@ local forward="⟰"
 local behind="⟱"
 local dot="•"
 
-remote_pattern_ahead="# Your branch is ahead of"
-remote_pattern_behind="# Your branch is behind"
-remote_pattern_diverge="# Your branch and (.*) have diverged"
+#remote_pattern_ahead="# Your branch is ahead of"
+#remote_pattern_behind="# Your branch is behind"
+#remote_pattern_diverge="# Your branch and (.*) have diverged"
 
 status="$(git status 2>/dev/null)"
 
