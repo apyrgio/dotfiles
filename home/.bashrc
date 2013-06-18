@@ -118,3 +118,4 @@ export PROMPT_COMMAND=set_prompt
 # Useful aliases
 alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
 alias make_xseg="$HOME/scripts/make_xseg.sh"
+alias stress_cached="$HOME/scripts/stress_cached.sh"
