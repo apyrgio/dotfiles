@@ -15,6 +15,8 @@ bldblu='\[\e[1;34m\]' # Cyan
 bldprp='\[\e[1;35m\]' # Cyan
 end='\[\e[0m\]'    # Text Reset
 
+source /etc/bash_completion
+
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
