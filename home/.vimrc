@@ -129,5 +129,5 @@ nmap <F2> :TlistToggle<CR>
 nmap <F3> <C-W>t
 vmap <F4> d:set tw=80<ENTER>Pgq`]:set tw=0<ENTER>
 
-set tags=./tags,tags,/home/apyrgio/archipelago/xseg/tags
+set tags=./tags,tags,$HOME/archipelago/xseg/tags
 
