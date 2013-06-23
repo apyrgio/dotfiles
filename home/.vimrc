@@ -116,6 +116,9 @@ if has('autocmd')
 	au BufNewFile,BufRead COMMIT_EDITMSG call feedkeys('ggO', 't')
 endif
 
+set tags=./tags,tags,$HOME/archipelago/xseg/tags,$HOME/.vimtags
+:let g:easytags_events = ['BufWritePost']
+
 """"""""""""
 " Mappings
 """"""""""""
@@ -128,6 +131,4 @@ nmap <silent> <A-Right> :wincmd l<CR>
 nmap <F2> :TlistToggle<CR>
 nmap <F3> <C-W>t
 vmap <F4> d:set tw=80<ENTER>Pgq`]:set tw=0<ENTER>
-
-set tags=./tags,tags,$HOME/archipelago/xseg/tags
 
