@@ -117,7 +117,11 @@ if has('autocmd')
 endif
 
 set tags=./tags,tags,$HOME/archipelago/xseg/tags,$HOME/.vimtags
-:let g:easytags_events = ['BufWritePost']
+":let g:easytags_events = ['BufWritePost']
+
+" Option to disable easytags
+":let g:easytags_auto_update = 0
+":let g:easytags_auto_highlight = 0
 
 """"""""""""
 " Mappings
