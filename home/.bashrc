@@ -54,7 +54,8 @@ else
     if [[ $status =~ "Untracked files" ]]; then
         state=${bldylw}${dot}${end}
     fi
-    if [[ $status =~ "Changes not staged for commit" ]]; then
+    if [[ $status =~ "Changes not staged for commit" ]] ||
+	    [[ $status =~ "Changed but not updated" ]]; then
         state=${state}${bldred}${dot}${end}
     fi
     if [[ $status =~ "Changes to be committed" ]]; then
