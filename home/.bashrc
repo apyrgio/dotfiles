@@ -27,91 +27,93 @@ alias ls='ls $LS_OPTIONS'
 alias ll='ls $LS_OPTIONS -l'
 alias l='ls $LS_OPTIONS -lA'
 
-#Disable XON/XOFF to use Crtl-s in conjuction with Ctrl-r for bash history
-stty ixany
-stty ixoff -ixon
+# Disable XON/XOFF to use Crtl-s in conjuction with Ctrl-r for bash history
+# Do this only for login shells and not for interactive shells (e.g. scp)
+if [[ -t 0 ]]; then
+	stty ixany
+	stty ixoff -ixon
+fi
 
 function parse_git {
-branch=$(__git_ps1 "%s")
-if [[ -z $branch ]]; then
-    return
-fi
+	branch=$(__git_ps1 "%s")
+	if [[ -z $branch ]]; then
+	    return
+	fi
 
-local forward="⟰"
-local behind="⟱"
-local dot="•"
+	local forward="⟰"
+	local behind="⟱"
+	local dot="•"
 
-#remote_pattern_ahead="# Your branch is ahead of"
-#remote_pattern_behind="# Your branch is behind"
-#remote_pattern_diverge="# Your branch and (.*) have diverged"
+	#remote_pattern_ahead="# Your branch is ahead of"
+	#remote_pattern_behind="# Your branch is behind"
+	#remote_pattern_diverge="# Your branch and (.*) have diverged"
 
-status="$(git status 2>/dev/null)"
+	status="$(git status 2>/dev/null)"
 
-state=""
-if [[ $status =~ "working directory clean" ]]; then
-    state=${bldgrn}${dot}${end}
-else
-    if [[ $status =~ "Untracked files" ]]; then
-        state=${bldylw}${dot}${end}
-    fi
-    if [[ $status =~ "Changes not staged for commit" ]] ||
-	    [[ $status =~ "Changed but not updated" ]]; then
-        state=${state}${bldred}${dot}${end}
-    fi
-    if [[ $status =~ "Changes to be committed" ]]; then
-        state=${state}${bldylw}${dot}${end}
-    fi
-fi
+	state=""
+	if [[ $status =~ "working directory clean" ]]; then
+	    state=${bldgrn}${dot}${end}
+	else
+	    if [[ $status =~ "Untracked files" ]]; then
+		state=${bldylw}${dot}${end}
+	    fi
+	    if [[ $status =~ "Changes not staged for commit" ]] ||
+		    [[ $status =~ "Changed but not updated" ]]; then
+		state=${state}${bldred}${dot}${end}
+	    fi
+	    if [[ $status =~ "Changes to be committed" ]]; then
+		state=${state}${bldylw}${dot}${end}
+	    fi
+	fi
 
-#direction=""
-#if [[ $status =~ $remote_pattern_ahead ]]; then
-#    direction=${bldgrn}${forward}${end}
-#elif [[ $status =~ $remote_pattern_behind ]]; then
-#    direction=${bldred}${behind}${end}
-#elif [[ $status =~ $remote_pattern_diverge ]]; then
-#    direction=${bldred}${forward}${end}${bldgrn}${behind}${end}
-#fi
+	#direction=""
+	#if [[ $status =~ $remote_pattern_ahead ]]; then
+	#    direction=${bldgrn}${forward}${end}
+	#elif [[ $status =~ $remote_pattern_behind ]]; then
+	#    direction=${bldred}${behind}${end}
+	#elif [[ $status =~ $remote_pattern_diverge ]]; then
+	#    direction=${bldred}${forward}${end}${bldgrn}${behind}${end}
+	#fi
 
-branch=${txtblu}${branch}${end}
-git_bit="${bldblu}[${end}${branch}${state}\
-${git_bit}${direction}${bldblu}]${end}"
+	branch=${txtblu}${branch}${end}
+	git_bit="${bldblu}[${end}${branch}${state}\
+	${git_bit}${direction}${bldblu}]${end}"
 
-printf "%s" "$git_bit"
+	printf "%s" "$git_bit"
 }
 
 function set_titlebar {
-case $TERM in
-    *xterm*|ansi|rxvt)
-        printf "\033]0;%s\007" "$*"
-        ;;
-esac
+	case $TERM in
+	    *xterm*|ansi|rxvt)
+		printf "\033]0;%s\007" "$*"
+		;;
+	esac
 }
 
 function set_prompt {
+	# get cursor position and add new line if we're not in first column
+	local cursor_pos
+	stty -echo
+	echo -n $'\e[6n'
+	read -r -dR cursor_pos
+	stty echo
+	cursor_pos=${cursor_pos#??}
+	cursor_line=${cursor_pos##*;}
+	if [ ${cursor_line-1} -gt 1 ]; then
+		echo "${c_error}↵${c_clr}"
+	fi
 
-# get cursor position and add new line if we're not in first column
-local cursor_pos
-stty -echo
-echo -n $'\e[6n'
-read -r -dR cursor_pos
-stty echo
-cursor_pos=${cursor_pos#??}
-cursor_line=${cursor_pos##*;}
-if [ ${cursor_line-1} -gt 1 ]; then
-	echo "${c_error}↵${c_clr}"
-fi
+	git="$(parse_git)"
 
-git="$(parse_git)"
+	PS1="${txtblu}\u${end} ${txtwht}\w${end}"
+	if [[ -n "$git" ]]; then
+	    PS1="$PS1 $git ${bldprp}❯❯${end} "
+	else
+	    PS1="$PS1 ${bldprp}❯❯${end} "
+	fi
+	export PS1
 
-PS1="${txtblu}\u${end} ${txtwht}\w${end}"
-if [[ -n "$git" ]]; then
-    PS1="$PS1 $git ${bldprp}❯❯${end} "
-else
-    PS1="$PS1 ${bldprp}❯❯${end} "
-fi
-export PS1
-
-set_titlebar "$USER@${HOSTNAME%%.*} $PWD"
+	set_titlebar "$USER@${HOSTNAME%%.*} $PWD"
 }
 
 export PROMPT_COMMAND=set_prompt
