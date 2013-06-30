@@ -15,7 +15,13 @@ bldblu='\[\e[1;34m\]' # Cyan
 bldprp='\[\e[1;35m\]' # Cyan
 end='\[\e[0m\]'    # Text Reset
 
-source /etc/bash_completion
+
+# Explicitly source bash/git completion
+if [[ -n $(uname -a | grep -i Debian) ]]; then
+	source /etc/bash_completion
+elif [[ -n $(uname -a | grep -i Arch) ]]; then
+	source /usr/share/git/completion/git-prompt.sh
+fi
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
@@ -76,8 +82,7 @@ function parse_git {
 	#fi
 
 	branch=${txtblu}${branch}${end}
-	git_bit="${bldblu}[${end}${branch}${state}\
-	${git_bit}${direction}${bldblu}]${end}"
+	git_bit="${bldblu}[${end}${branch}${state}${direction}${bldblu}]${end}"
 
 	printf "%s" "$git_bit"
 }
