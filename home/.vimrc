@@ -99,6 +99,11 @@ endif
 "Force spell checking depending on filetype
 au FileType rst setlocal spell spelllang=en_us,el
 au FileType tex setlocal spell spelllang=en_us,el
+au FileType tex setlocal tw=80
+au FileType tex setlocal fo+=a
+au FileType tex setlocal fo+=w
+au FileType tex hi clear ExtraWhitespace
+
 "au Filetype rst colorscheme default
 "au Filetype rst colorscheme evening
 "au FileType rst setlocal t_Co=16
