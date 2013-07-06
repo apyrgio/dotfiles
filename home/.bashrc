@@ -123,8 +123,13 @@ function set_prompt {
 
 export PROMPT_COMMAND=set_prompt
 
+function custom-clone() {
+	git clone https://apyrgio@github.com/apyrgio/$1
+}
+
 # Useful aliases
 alias homeshick="$HOME/.homesick/repos/homeshick/home/.homeshick"
 alias make_xseg="$HOME/scripts/make_xseg.sh"
 alias grep_xseg="$HOME/scripts/grep_xseg.sh"
 alias stress_cached="$HOME/scripts/stress_cached.sh"
+alias github-clone=custom-clone
