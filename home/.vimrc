@@ -72,7 +72,6 @@ set ls=2			"Show filename at the bottom of the screen
 
 " Highlight the line where the cursor is
 set cursorline
-"hi cursorLine cterm=NONE term=NONE	"Make background grey, remove line
 
 filetype indent on
 filetype on
@@ -86,9 +85,14 @@ autocmd InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 autocmd InsertLeave * match ExtraWhitespace /\s\+$/
 autocmd BufWinLeave * call clearmatches()
 
-if version >= 703
-	execute "set colorcolumn=" . join(range(81,81), ',')
+if exists('+colorcolumn')
+	"execute "set colorcolumn=" . join(range(81,81), ',')
+	set colorcolumn = 81
 	hi ColorColumn ctermbg=darkgrey guibg=lightgrey
+else
+	hi OverLength ctermbg=darkgrey guibg=lightgrey
+	"au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
+	au BufWinEnter * let w:m2=matchadd('Overlength', '\%>80v.\+', -1)
 endif
 
 " Source a global configuration file if available
