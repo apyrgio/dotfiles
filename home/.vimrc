@@ -92,7 +92,11 @@ if exists('+colorcolumn')
 else
 	hi OverLength ctermbg=darkgrey guibg=lightgrey
 	"au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
+	let w:m2=matchadd('Overlength', '\%>80v.\+', -1)
 	au BufWinEnter * let w:m2=matchadd('Overlength', '\%>80v.\+', -1)
+	au InsertEnter * let w:m2=matchadd('Overlength', '\%>80v.\+', -1)
+	au InsertLeave * let w:m2=matchadd('Overlength', '\%>80v.\+', -1)
+	au BufWinLeave * call clearmatches()
 endif
 
 " Source a global configuration file if available
