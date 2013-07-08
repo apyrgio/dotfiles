@@ -87,7 +87,7 @@ autocmd BufWinLeave * call clearmatches()
 
 if exists('+colorcolumn')
 	"execute "set colorcolumn=" . join(range(81,81), ',')
-	set colorcolumn = 81
+	set colorcolumn=81
 	hi ColorColumn ctermbg=darkgrey guibg=lightgrey
 else
 	hi OverLength ctermbg=darkgrey guibg=lightgrey
