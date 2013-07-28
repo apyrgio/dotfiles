@@ -141,12 +141,23 @@ set tags=./tags,tags,$HOME/archipelago/xseg/tags,$HOME/.vimtags
 " Mappings
 """"""""""""
 
+" Bindings to switch between windows
 nmap <silent> <A-Up> :wincmd k<CR>
 nmap <silent> <A-Down> :wincmd j<CR>
 nmap <silent> <A-Left> :wincmd h<CR>
 nmap <silent> <A-Right> :wincmd l<CR>
 
+" Alternate bindings to switch between windows
+nmap <silent> <C-k> :wincmd k<CR>
+nmap <silent> <C-j> :wincmd j<CR>
+nmap <silent> <C-h> :wincmd h<CR>
+nmap <silent> <C-l> :wincmd l<CR>
+
 nmap <F2> :TlistToggle<CR>
 nmap <F3> <C-W>t
 vmap <F4> d:set tw=80<ENTER>Pgq`]:set tw=0<ENTER>
+
+" Alternate way to exit insert mode
+imap jk <Esc><Right>
+
 
