@@ -96,7 +96,10 @@ function set_titlebar {
 }
 
 function set_prompt {
-	# get cursor position and add new line if we're not in first column
+	# Clear PS1
+	PS1=""
+
+	# Get cursor position and add new line if we're not in first column
 	local cursor_pos
 	stty -echo
 	echo -n $'\e[6n'
@@ -108,14 +111,21 @@ function set_prompt {
 		echo "${c_error}↵${c_clr}"
 	fi
 
+	# Check if we are in virtual environment
+	if [[ -n ${VIRTUAL_ENV} ]]; then
+		PS1=${bldgrn}*${txtwht}
+	fi
+
+	# Print username, current dir and optionally git branch
 	git="$(parse_git)"
 
-	PS1="${txtblu}\u${end} ${txtwht}\w${end}"
+	PS1="${PS1}${txtblu}\u${end} ${txtwht}\w${end}"
 	if [[ -n "$git" ]]; then
 	    PS1="$PS1 $git ${bldprp}❯❯${end} "
 	else
 	    PS1="$PS1 ${bldprp}❯❯${end} "
 	fi
+
 	export PS1
 
 	set_titlebar "$USER@${HOSTNAME%%.*} $PWD"
