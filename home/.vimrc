@@ -160,4 +160,9 @@ vmap <F4> d:set tw=80<ENTER>Pgq`]:set tw=0<ENTER>
 " Alternate way to exit insert mode
 imap jk <Esc><Right>
 
+" Get cursor at the very end of line (i.e. at the right of the last line
+" character) and enter insert mode
+imap <F4> <END>
+nmap <F4> i<END>
+
 
