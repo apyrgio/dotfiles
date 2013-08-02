@@ -134,7 +134,7 @@ function set_prompt {
 export PROMPT_COMMAND=set_prompt
 
 function custom-clone() {
-	git clone https://apyrgio@github.com/apyrgio/$1
+	git clone https://apyrgio@github.com/apyrgio/$1 $2
 }
 
 # Useful aliases
