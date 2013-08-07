@@ -87,16 +87,12 @@ autocmd BufWinLeave * call clearmatches()
 
 if exists('+colorcolumn')
 	"execute "set colorcolumn=" . join(range(81,81), ',')
-	set colorcolumn=81
+	set colorcolumn=80
 	hi ColorColumn ctermbg=darkgrey guibg=lightgrey
 else
 	hi OverLength ctermbg=darkgrey guibg=lightgrey
-	"au BufWinEnter * let w:m1=matchadd('Search', '\%<81v.\%>77v', -1)
-	let w:m2=matchadd('Overlength', '\%>80v.\+', -1)
-	au BufWinEnter * let w:m2=matchadd('Overlength', '\%>80v.\+', -1)
-	au InsertEnter * let w:m2=matchadd('Overlength', '\%>80v.\+', -1)
-	au InsertLeave * let w:m2=matchadd('Overlength', '\%>80v.\+', -1)
-	au BufWinLeave * call clearmatches()
+	let w:m2=matchadd('Overlength', '\%>79v.\+', -1)
+	au BufWinEnter * let w:m2=matchadd('Overlength', '\%>79v.\+', -1)
 endif
 
 " Source a global configuration file if available
