@@ -151,7 +151,7 @@ nmap <silent> <C-l> :wincmd l<CR>
 
 nmap <F2> :TlistToggle<CR>
 nmap <F3> <C-W>t
-vmap <F4> d:set tw=80<ENTER>Pgq`]:set tw=0<ENTER>
+vmap <F4> d:set tw=79<ENTER>Pgq`]:set tw=0<ENTER>
 
 " Alternate way to exit insert mode
 imap jk <Esc><Right>
