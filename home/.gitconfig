@@ -15,3 +15,5 @@
 [merge]
 	ff = false
 	commit = false
+[mergetool]
+	keepBackup=false
