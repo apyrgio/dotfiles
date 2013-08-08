@@ -102,20 +102,6 @@ endif
 
 "Force spell checking depending on filetype
 au FileType rst setlocal spell spelllang=en_us,el
-au FileType tex setlocal spell spelllang=en_us,el
-au FileType tex setlocal tw=80
-au FileType tex setlocal fo+=a
-au FileType tex setlocal fo+=w
-au FileType tex hi clear ExtraWhitespace
-
-"au Filetype rst colorscheme default
-"au Filetype rst colorscheme evening
-"au FileType rst setlocal t_Co=16
-"au FileType rst setlocal nocursorline
-
-"For some reason those don't work
-"au BufNewFile,BufRead *.c let Tlist_Auto_Open=1
-"au BufNewFile,BufRead *.h let Tlist_Auto_Open=1
 
 " Only for GIT commits: Turn on spell-checking and enter insert mode at top
 " lines
@@ -128,6 +114,10 @@ endif
 
 set tags=./tags,tags,$HOME/archipelago/xseg/tags,$HOME/.vimtags
 ":let g:easytags_events = ['BufWritePost']
+
+""""""""
+" Tags
+""""""""
 
 " Option to disable easytags
 ":let g:easytags_auto_update = 0
