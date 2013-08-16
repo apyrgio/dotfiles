@@ -21,28 +21,29 @@ setenv LC_CTYPE en_US.UTF-8
 startup_message off
 vbell off
 altscreen on                    # Close vim windown after exit
-#escape ^\\
+escape ^bB
 
 
 # ----------------------------------------------------------------------
-termcapinfo * ti@:te@
-# The two following lines allow the use of 256 colors in vim
 term xterm
+# The following line allows the use of 256 colors in vim
 termcapinfo xterm 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+# The following line allows scrolling with the mouse
+termcapinfo xterm ti@:te@
 terminfo rxvt* 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
 
 caption always "%{= dd}%{K}[%H]  %M %d %Y @%C%a %20`%=%-w[%n %t]%+w"
 
 
 # binds ----------------------------------------------------------------
-bind "X" lockscreen
-bindkey "^t" screen
-bindkey "^v" screen -t vim vim
-bindkey "^h" screen -t htop htop
+#bind "X" lockscreen
+#bindkey "^t" screen
+#bindkey "^v" screen -t vim vim
+#bindkey "^h" screen -t htop htop
 #bind G screen -t duck elinks http://www.duckduckgo.com
-bindkey -k k1 prev
-bindkey -k k2 next
-
+#bindkey -k k1 prev
+#bindkey -k k2 next
+bind R eval "source $HOME/.screenrc" "echo '.screenrc reloaded!'"
 
 # applications ---------------------------------------------------------
 screen -t bash
